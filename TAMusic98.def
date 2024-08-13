@@ -1,0 +1,11 @@
+LIBRARY
+EXPORTS
+  PlaySoundA=winmm.PlaySoundA
+  auxGetDevCapsA=winmm.auxGetDevCapsA
+  auxGetNumDevs=winmm.auxGetNumDevs
+  auxGetVolume=winmm.auxGetVolume
+  auxSetVolume=winmm.auxSetVolume
+  mciSendStringA=impl_mciSendStringA
+  waveOutGetNumDevs=winmm.waveOutGetNumDevs
+  waveOutGetVolume=winmm.waveOutGetVolume
+  waveOutSetVolume=winmm.waveOutSetVolume
