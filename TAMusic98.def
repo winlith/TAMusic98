@@ -3,8 +3,8 @@ EXPORTS
   PlaySoundA=winmm.PlaySoundA
   auxGetDevCapsA=winmm.auxGetDevCapsA
   auxGetNumDevs=winmm.auxGetNumDevs
-  auxGetVolume=winmm.auxGetVolume
-  auxSetVolume=winmm.auxSetVolume
+  auxGetVolume=impl_auxGetVolume
+  auxSetVolume=impl_auxSetVolume
   mciSendStringA=impl_mciSendStringA
   waveOutGetNumDevs=winmm.waveOutGetNumDevs
   waveOutGetVolume=winmm.waveOutGetVolume

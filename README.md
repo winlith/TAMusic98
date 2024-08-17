@@ -5,7 +5,7 @@ Run GOG / Steam version of Total Annihilation on Windows 98!
 
 1. Install Total Annihilation from GOG or Steam on a modern PC (the GOG installer doesn't run on W98).
 2. Copy the game files onto your Windows 98 PC.
-3. Download win32.dll file from [**here**](https://github.com/winlith/TAMusic98/releases/download/1.0/win32.dll) and replace it in the game's folder.
+3. Download win32.dll file from [**here**](https://github.com/winlith/TAMusic98/releases/download/1.01/win32.dll) and replace it in the game's folder.
 4. Run TotalA.exe and check if it works. If it loads the main menu, you're good to go.
 5. If it crashes, rename `tacticsX.hpi` files to `tacticsX.ufo`.
 6. Enjoy!

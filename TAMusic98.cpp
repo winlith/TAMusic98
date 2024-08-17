@@ -38,6 +38,27 @@ std::vector<std::string> split(std::string s, std::string delimiter)
 	return res;
 }
 
+unsigned short convertVolume(DWORD vol)
+{
+	return (unsigned short)(((float)(vol & 0x0000FFFF)) / 65535.0f * 1000.0f);
+}
+
+DWORD backConvertVolume(unsigned short vol)
+{
+	unsigned short singleVolume = (unsigned short)(((float)vol) / 1000.0f * 65535.0f);
+	return (DWORD)singleVolume | ((DWORD)singleVolume << 16);
+}
+
+MMRESULT setVolume(unsigned short vol)
+{
+	char cmd[30];
+	sprintf(cmd, "setaudio song volume to %d", vol);
+#if defined(_DEBUG)
+	logToFile(cmd);
+#endif
+	return mciSendString(cmd, NULL, 0, NULL);
+}
+
 BOOL APIENTRY DllMain( HANDLE hModule, 
                        DWORD  ul_reason_for_call, 
                        LPVOID lpReserved
@@ -85,6 +106,7 @@ MCIERROR __stdcall impl_mciSendStringA( LPCTSTR lpszCommand,
 				openCmd += currentTrack;
 				openCmd +=".mp3\" type mpegvideo alias song";
 				result = mciSendStringA(openCmd.c_str(), NULL, 0, NULL);
+				result = setVolume(volume);
 				result = mciSendStringA("set song time format milliseconds", NULL, 0, NULL);
 				char *length = (char *)malloc(sizeof(char)*64);
 				result = mciSendStringA("status song length", length, 64, NULL);
@@ -179,3 +201,24 @@ MCIERROR __stdcall impl_mciSendStringA( LPCTSTR lpszCommand,
 	return result;
 }
 
+MMRESULT __stdcall impl_auxGetVolume(UINT uDeviceID, LPDWORD pdwVolume)
+{
+#if defined(_DEBUG)
+	char log[32];
+	sprintf(log, "auxGetVolume %x", *pdwVolume);
+	logToFile(log);
+#endif
+	*pdwVolume = backConvertVolume(volume);
+	return 0;
+}
+
+MMRESULT __stdcall impl_auxSetVolume(UINT uDeviceID, DWORD dwVolume)
+{
+#if defined(_DEBUG)
+	char log[32];
+	sprintf(log, "auxSetVolume %x", dwVolume);
+	logToFile(log);
+#endif
+	volume = convertVolume(dwVolume);
+	return setVolume(volume);
+}
