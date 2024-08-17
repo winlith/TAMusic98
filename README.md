@@ -17,3 +17,9 @@ Total Annihilation was originally released on CDs, which contained the game's mu
 ## Solution
 
 The `win32.dll` library from this repo does essentially the same thing as the original one, but is compiled using Microsoft Visual C++ 6.0, which is a period correct compiler, and so has no problem running on older versions of Windows.
+
+## Building
+1. Install Microsoft Visual C++ 6.0.
+2. Open `TAMusic98.dsw` workspace file.
+3. Set desired build configuration.
+4. Build the project. The compiled library will appear in Debug or Release folder, depending on chosen build config.
